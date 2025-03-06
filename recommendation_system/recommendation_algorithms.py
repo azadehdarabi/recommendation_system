@@ -23,9 +23,6 @@ def recommend_products_cbf(user_id, user_profiles, product_feature_vectors, purc
     """Recommends products using Content-Based Filtering."""
     user_profile = user_profiles[user_id]
 
-    # Reshape user_profile to a 2D array
-    user_profile_2d = user_profile.reshape(1, -1)
-
     # Use NearestNeighbors for faster similarity search
     nn = NearestNeighbors(n_neighbors=top_n, metric="cosine")
     nn.fit(np.array(list(product_feature_vectors.values())))

@@ -6,13 +6,13 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from collections import defaultdict
 from scipy.sparse import csr_matrix
 
-from .data_loading import extract_tags_and_categories, build_index, load_data
-from .feature_engineering import compute_product_feature_vectors_parallel
-from .matrix_factorization import get_svd_factors
-from .recommendation_algorithms import recommend_products_device_based, \
+from recommendation_system.data_loading import extract_tags_and_categories, build_index, load_data
+from recommendation_system.feature_engineering import compute_product_feature_vectors_parallel
+from recommendation_system.matrix_factorization import get_svd_factors
+from recommendation_system.recommendation_algorithms import recommend_products_device_based, \
     recommend_products_time_based, recommend_products_cbf, recommend_products_mf, recommend_popular_trending_products
-from .setup import redis_client
-from .user_profiles import compute_user_profiles_parallel
+from recommendation_system.setup import redis_client
+from recommendation_system.user_profiles import compute_user_profiles_parallel
 
 # Explanation templates for recommendations
 EXPLANATION_TEMPLATES = {
@@ -40,7 +40,7 @@ def compute_product_popularity(purchase_history, products, rating_weight=0.7, fr
         frequency = purchase_frequency[product_id]
         product_popularity[product_id] = (rating_weight * rating) + (frequency_weight * frequency)
 
-    # Normalize popularity scores (optional)
+    # Normalize popularity scores
     max_popularity = max(product_popularity.values(), default=1)
     for product_id in product_popularity:
         product_popularity[product_id] /= max_popularity
@@ -199,7 +199,7 @@ def main():
     user_factors, item_factors = get_svd_factors(user_item_matrix)
     popular_products = compute_product_popularity(purchase_history, products)
 
-    season_input = ["All Year", "Summer"]  # Example season input
+    season_input = ["All Year", "Summer"]
 
     if 'pytest' in sys.modules:
         for user_id in users:

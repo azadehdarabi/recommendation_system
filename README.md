@@ -13,7 +13,7 @@ This project implements a **hybrid recommendation system** that combines multipl
 
 1. **Clone the Repository**:
     ```bash
-     git clone https://github.com/your-username/recommendation-system.git
+     git clone https://github.com/azadehdarabi/recommendation_system.git
      cd recommendation-system
    ```
    
