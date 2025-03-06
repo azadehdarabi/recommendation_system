@@ -80,4 +80,4 @@ The recommendation system combines the following components to generate personal
 
    - Weights for each method can be configured via environment variables.
 
-For detailed documentation, refer to the docs/ directory.
+For detailed documentation, refer to the documentation.
